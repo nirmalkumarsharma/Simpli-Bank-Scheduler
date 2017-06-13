@@ -38,7 +38,6 @@ public class SimpliJobController {
 	public String scheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
-		System.out.println(simpliJob);
 		if(simpliJob != null){
 		quartzSchedulerController.scheduleJob(simpliJob);
 		return "redirect:/index.html";
