@@ -21,6 +21,7 @@ public class InitDbService {
 	@PostConstruct
 	public void initFunction() throws SchedulerException
 	{
+		System.out.println("Initiliazing Application");
 		SimpliJob simpliJob1=new SimpliJob();
 		simpliJob1.setName("Job1");
 		simpliJob1.setSimpliGroup("Group1");
