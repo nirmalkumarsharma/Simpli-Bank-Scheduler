@@ -20,7 +20,6 @@ public class SimpliJob{
 	@Id
 	@GeneratedValue
 	private int id;
-	
 	private String name;
 	private String simpliGroup;
 	private Calendar startTime;
