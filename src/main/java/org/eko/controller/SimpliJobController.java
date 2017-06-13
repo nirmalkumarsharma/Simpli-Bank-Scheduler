@@ -1,32 +1,53 @@
 package org.eko.controller;
 
 import org.eko.entity.SimpliJob;
-import org.eko.repository.SimpliJobRepository;
 import org.eko.service.SimpliJobService;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
 public class SimpliJobController {
 	
 	@Autowired
 	private SimpliJobService simpliJobService;
 	
 	@Autowired
-	private SimpliJobRepository simpliJobRepository;
+	private QuartzSchedulerController quartzSchedulerController;
+	
+	
 	
 	@RequestMapping("/simplijob/unschedule/{id}")
-	public String unscheduleSimpliJob(@PathVariable int id)
+	public String unscheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
-		SimpliJob simpliJob=simpliJobRepository.findOne(id);
-		return "index";
+		SimpliJob simpliJob=simpliJobService.findOne(id);
+		if(simpliJob != null){
+		quartzSchedulerController.unscheduleJob(simpliJob);
+		return "redirect:/index.html";
+		}
+		else
+		{
+			System.err.println("Obejct is null");
+			return "redirect:/index.html";
+		}
 	}
 	
 	@RequestMapping("/simplijob/schedule/{id}")
-	public String scheduleSimpliJob(@PathVariable int id)
+	public String scheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
-		SimpliJob simpliJob=simpliJobRepository.findOne(id);
-		return "index";
+		SimpliJob simpliJob=simpliJobService.findOne(id);
+		System.out.println(simpliJob);
+		if(simpliJob != null){
+		quartzSchedulerController.scheduleJob(simpliJob);
+		return "redirect:/index.html";
+		}
+		else
+		{
+			System.err.println("Obejct is null");
+			return "redirect:/index.html";
+		}
 	}
 
 }

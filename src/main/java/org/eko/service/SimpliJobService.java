@@ -13,6 +13,11 @@ public class SimpliJobService {
 	@Autowired
 	private SimpliJobRepository simpliJobRepository;
 	
+	public SimpliJob findOne(int id)
+	{
+		return simpliJobRepository.findOne(id);
+	}
+	
 	public List<SimpliJob> getSimpliJobs()
 	{
 		return simpliJobRepository.findAll();

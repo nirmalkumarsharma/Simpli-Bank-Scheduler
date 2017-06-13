@@ -7,6 +7,9 @@ import javax.transaction.Transactional;
 
 import org.eko.entity.SimpliJob;
 import org.eko.repository.SimpliJobRepository;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,7 @@ public class InitDbService {
 	private SimpliJobRepository simpliJobRepository;
 	
 	@PostConstruct
-	public void initFunction()
+	public void initFunction() throws SchedulerException
 	{
 		SimpliJob simpliJob1=new SimpliJob();
 		simpliJob1.setName("Job1");
@@ -48,4 +51,5 @@ public class InitDbService {
 		simpliJob4.setEndtime(new GregorianCalendar(2017, 6, 12, 17, 5, 12));
 		simpliJobRepository.save(simpliJob4);
 	}
+	
 }

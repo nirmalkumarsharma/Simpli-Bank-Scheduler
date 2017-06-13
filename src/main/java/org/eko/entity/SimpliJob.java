@@ -7,8 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.quartz.DisallowConcurrentExecution;
+import org.quartz.InterruptableJob;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.quartz.UnableToInterruptJobException;
+
 @Entity
-public class SimpliJob {
+public class SimpliJob{
 
 	@Id
 	@GeneratedValue
@@ -22,7 +29,6 @@ public class SimpliJob {
 	public SimpliJob() {
 		// TODO Auto-generated constructor stub
 	}
-	/*
 	public SimpliJob(int id, String name, String simpliGroup, Calendar startTime, Calendar endtime) {
 		super();
 		this.id = id;
@@ -31,7 +37,6 @@ public class SimpliJob {
 		this.startTime = startTime;
 		this.endtime = endtime;
 	}
-*/
 	public int getId() {
 		return id;
 	}

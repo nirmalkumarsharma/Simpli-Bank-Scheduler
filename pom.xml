@@ -10,9 +10,20 @@
   
   <properties>
   	<org.springframework.version>4.3.8.RELEASE</org.springframework.version>
+  	<org.quartz.version>2.3.0</org.quartz.version>
   </properties>
   
   <dependencies>
+  	<dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>${org.quartz.version}</version>
+  	</dependency>
+  	<dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz-jobs</artifactId>
+      <version>${org.quartz.version}</version>
+  	</dependency>
 	<dependency>
     	<groupId>org.glassfish.web</groupId>
     	<artifactId>javax.servlet.jsp.jstl</artifactId>
