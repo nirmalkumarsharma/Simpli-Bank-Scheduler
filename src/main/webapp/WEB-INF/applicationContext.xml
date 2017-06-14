@@ -43,4 +43,5 @@
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"	id="transactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
 </beans>

@@ -23,8 +23,9 @@ public class SimpliJobController {
 	public String unscheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
-		if(simpliJob != null){
-		quartzSchedulerController.unscheduleJob(simpliJob);
+		if(simpliJob != null)
+		{
+			quartzSchedulerController.unscheduleJob(simpliJob);
 		}
 		else
 		{

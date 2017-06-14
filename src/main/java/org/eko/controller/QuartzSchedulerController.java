@@ -76,6 +76,7 @@ public class QuartzSchedulerController {
 		{
 			System.err.println("Job Already Scheduled!");
 		}
+		scheduler.start();
 	}
 	
 	public void unscheduleJob(SimpliJob simpliJob) throws SchedulerException

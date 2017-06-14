@@ -1,5 +1,8 @@
 package org.eko.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.annotation.PostConstruct;
@@ -7,9 +10,14 @@ import javax.transaction.Transactional;
 
 import org.eko.entity.SimpliJob;
 import org.eko.repository.SimpliJobRepository;
+import org.eko.rest.InputJsonSimpliJob;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Transactional
 @Service
@@ -19,7 +27,7 @@ public class InitDbService {
 	private SimpliJobRepository simpliJobRepository;
 	
 	@PostConstruct
-	public void initFunction() throws SchedulerException
+	public void init() throws SchedulerException, JsonGenerationException, JsonMappingException, IOException
 	{
 		System.out.println("Initiliazing Application");
 		
@@ -32,6 +40,11 @@ public class InitDbService {
 		simpliJob1.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 59));
 		simpliJob1.setStatus(1);
 		simpliJobRepository.save(simpliJob1);}
+		else
+		{
+			simpliJob1.setStatus(1);
+			simpliJobRepository.save(simpliJob1);
+		}
 		
 		SimpliJob simpliJob2=simpliJobRepository.findByName("Job2");
 		if(simpliJob2==null){
@@ -42,6 +55,11 @@ public class InitDbService {
 		simpliJob2.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 10));
 		simpliJob2.setStatus(1);
 		simpliJobRepository.save(simpliJob2);}
+		else
+		{
+			simpliJob2.setStatus(1);
+			simpliJobRepository.save(simpliJob2);
+		}
 		
 		SimpliJob simpliJob3=simpliJobRepository.findByName("Job3");
 		if(simpliJob3==null){
@@ -52,6 +70,11 @@ public class InitDbService {
 		simpliJob3.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 11));
 		simpliJob3.setStatus(1);
 		simpliJobRepository.save(simpliJob3);}
+		else
+		{
+			simpliJob3.setStatus(1);
+			simpliJobRepository.save(simpliJob3);
+		}
 		
 		SimpliJob simpliJob4=simpliJobRepository.findByName("Job4");
 		if(simpliJob4==null){
@@ -62,6 +85,16 @@ public class InitDbService {
 		simpliJob4.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 12));
 		simpliJob4.setStatus(1);
 		simpliJobRepository.save(simpliJob4);}
+		else
+		{
+			simpliJob4.setStatus(1);
+			simpliJobRepository.save(simpliJob4);
+		}
+	/*	
+		ObjectMapper mapper=new ObjectMapper();
+		Calendar startTime=new GregorianCalendar(2017, 6, 14, 11, 27, 1);
+		InputJsonSimpliJob inputJsonSimpliJob=new InputJsonSimpliJob(1,startTime, 2);
+		mapper.writeValue(new File("/media/nirmal/GODOWN/ijsj.json"), inputJsonSimpliJob);*/
 	}
 	
 }
