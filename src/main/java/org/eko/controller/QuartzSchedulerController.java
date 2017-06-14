@@ -40,7 +40,6 @@ public class QuartzSchedulerController {
 	{
 		scheduler=new StdSchedulerFactory().getScheduler();
 		scheduler.start();
-		//DateBuilder.dateOf(simpliJob.getStartTime().get(Calendar.HOUR_OF_DAY), simpliJob.getStartTime().get(Calendar.MINUTE), simpliJob.getStartTime().get(Calendar.SECOND), simpliJob.getStartTime().get(Calendar.DAY_OF_MONTH),simpliJob.getStartTime().get(Calendar.MONTH),simpliJob.getStartTime().get(Calendar.YEAR));
 		if(simpliJob.getStatus()==1){
 		if(simpliJob.getId()==1)
 		{
