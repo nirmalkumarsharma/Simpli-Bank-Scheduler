@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SimpliJobRepository extends JpaRepository<SimpliJob, Integer>
 {
-
+	SimpliJob findByName(String name);
 }
