@@ -32,14 +32,16 @@ public class InitDbService {
 		System.out.println("Initiliazing Application");
 		
 		SimpliJob simpliJob1=simpliJobRepository.findByName("Job1");
-		if(simpliJob1==null){
-		simpliJob1=new SimpliJob();
-		simpliJob1.setName("Job1");
-		simpliJob1.setSimpliGroup("Group1");
-		simpliJob1.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 1));
-		simpliJob1.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 59));
-		simpliJob1.setStatus(1);
-		simpliJobRepository.save(simpliJob1);}
+		if(simpliJob1==null)
+		{
+			simpliJob1=new SimpliJob();
+			simpliJob1.setName("Job1");
+			simpliJob1.setSimpliGroup("Group1");
+			simpliJob1.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 1));
+			simpliJob1.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 59));
+			simpliJob1.setStatus(1);
+			simpliJobRepository.save(simpliJob1);
+		}
 		else
 		{
 			simpliJob1.setStatus(1);
@@ -62,14 +64,16 @@ public class InitDbService {
 		}
 		
 		SimpliJob simpliJob3=simpliJobRepository.findByName("Job3");
-		if(simpliJob3==null){
-		simpliJob3=new SimpliJob();
-		simpliJob3.setName("Job3");
-		simpliJob3.setSimpliGroup("Group1");
-		simpliJob3.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 8));
-		simpliJob3.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 11));
-		simpliJob3.setStatus(1);
-		simpliJobRepository.save(simpliJob3);}
+		if(simpliJob3==null)
+		{
+			simpliJob3=new SimpliJob();
+			simpliJob3.setName("Job3");
+			simpliJob3.setSimpliGroup("Group1");
+			simpliJob3.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 8));
+			simpliJob3.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 11));
+			simpliJob3.setStatus(1);
+			simpliJobRepository.save(simpliJob3);
+		}
 		else
 		{
 			simpliJob3.setStatus(1);
@@ -77,24 +81,20 @@ public class InitDbService {
 		}
 		
 		SimpliJob simpliJob4=simpliJobRepository.findByName("Job4");
-		if(simpliJob4==null){
-		simpliJob4=new SimpliJob();
-		simpliJob4.setName("Job4");
-		simpliJob4.setSimpliGroup("Group1");
-		simpliJob4.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 9));
-		simpliJob4.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 12));
-		simpliJob4.setStatus(1);
-		simpliJobRepository.save(simpliJob4);}
+		if(simpliJob4==null)
+		{
+			simpliJob4=new SimpliJob();
+			simpliJob4.setName("Job4");
+			simpliJob4.setSimpliGroup("Group1");
+			simpliJob4.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 9));
+			simpliJob4.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 12));
+			simpliJob4.setStatus(1);
+			simpliJobRepository.save(simpliJob4);
+		}
 		else
 		{
 			simpliJob4.setStatus(1);
 			simpliJobRepository.save(simpliJob4);
 		}
-	/*	
-		ObjectMapper mapper=new ObjectMapper();
-		Calendar startTime=new GregorianCalendar(2017, 6, 14, 11, 27, 1);
-		InputJsonSimpliJob inputJsonSimpliJob=new InputJsonSimpliJob(1,startTime, 2);
-		mapper.writeValue(new File("/media/nirmal/GODOWN/ijsj.json"), inputJsonSimpliJob);*/
 	}
-	
 }
