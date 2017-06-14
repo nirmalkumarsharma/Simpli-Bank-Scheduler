@@ -10,7 +10,7 @@ import org.quartz.UnableToInterruptJobException;
 @DisallowConcurrentExecution
 public class BusinessJobC implements Job, InterruptableJob
 {
-	public static int REPEATINTERVALINMILLISECONDS=200;
+	public static int REPEATINTERVALINMILLISECONDS=2000;
 	public static int REPEATCOUNT=20;
 	
 	@Override

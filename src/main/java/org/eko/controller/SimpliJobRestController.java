@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class SimpliJobController {
-	
+public class SimpliJobRestController {
+
 	@Autowired
 	private SimpliJobService simpliJobService;
 	
 	@Autowired
 	private QuartzSchedulerController quartzSchedulerController;
-
-	@RequestMapping("/simplijob/unschedule/{id}")
-	public String unscheduleSimpliJob(@PathVariable int id) throws SchedulerException
+	
+	
+	@RequestMapping(value="/simplijob/rest/unschedule/{id}", method=RequestMethod.PUT)
+	public @ResponseBody String unscheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
 		if(simpliJob != null){
@@ -30,12 +31,11 @@ public class SimpliJobController {
 		else
 		{
 			System.err.println("Obejct is null");
-			return "redirect:";
+			return "redirect:/";
 		}
 	}
-	
-	@RequestMapping("/simplijob/schedule/{id}")
-	public String scheduleSimpliJob(@PathVariable int id) throws SchedulerException
+	@RequestMapping(value="/simplijob/rest/schedule/{id}", method=RequestMethod.PUT)
+	public @ResponseBody String scheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
 		if(simpliJob != null){

@@ -12,7 +12,7 @@ public class IndexController {
 	@Autowired
 	private SimpliJobService simpliJobService;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String index(Model model)
 	{
 		model.addAttribute("simplijobs",simpliJobService.getSimpliJobs());
