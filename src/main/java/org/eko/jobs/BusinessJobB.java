@@ -11,6 +11,7 @@ import org.quartz.UnableToInterruptJobException;
 public class BusinessJobB implements Job, InterruptableJob
 {
 	public static int REPEATINTERVALINMILLISECONDS=200;
+	public static int REPEATCOUNT=20;
 	
 	@Override
 	public void interrupt() throws UnableToInterruptJobException

@@ -1,17 +1,19 @@
 package org.eko.controller;
 
+import java.util.Calendar;
+
 import org.eko.entity.SimpliJob;
 import org.eko.jobs.BusinessJobA;
 import org.eko.jobs.BusinessJobB;
 import org.eko.jobs.BusinessJobC;
 import org.eko.jobs.BusinessJobD;
 import org.eko.repository.SimpliJobRepository;
+import org.quartz.DateBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SimpleScheduleBuilder;
-import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
@@ -25,10 +27,10 @@ public class QuartzSchedulerController {
 	JobDetail jobDetail2;
 	JobDetail jobDetail3;
 	JobDetail jobDetail4;
-	SimpleTrigger trigger1;
-	SimpleTrigger trigger2;
-	SimpleTrigger trigger3;
-	SimpleTrigger trigger4;
+	Trigger trigger1;
+	Trigger trigger2;
+	Trigger trigger3;
+	Trigger trigger4;
 	Scheduler scheduler;
 	
 	@Autowired
@@ -37,32 +39,34 @@ public class QuartzSchedulerController {
 	public void scheduleJob(SimpliJob simpliJob) throws SchedulerException
 	{
 		scheduler=new StdSchedulerFactory().getScheduler();
+		scheduler.start();
+		//DateBuilder.dateOf(simpliJob.getStartTime().get(Calendar.HOUR_OF_DAY), simpliJob.getStartTime().get(Calendar.MINUTE), simpliJob.getStartTime().get(Calendar.SECOND), simpliJob.getStartTime().get(Calendar.DAY_OF_MONTH),simpliJob.getStartTime().get(Calendar.MONTH),simpliJob.getStartTime().get(Calendar.YEAR));
 		if(simpliJob.getStatus()==1){
 		if(simpliJob.getId()==1)
 		{
 			jobDetail1=JobBuilder.newJob(BusinessJobA.class).withIdentity(simpliJob.getName(),simpliJob.getSimpliGroup()).build();
-			trigger1=(SimpleTrigger) TriggerBuilder.newTrigger().withIdentity("Trigger1",simpliJob.getSimpliGroup()).startAt(simpliJob.getStartTime().getTime()).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobA.REPEATINTERVALINMILLISECONDS).repeatForever()).build();
+			trigger1=(Trigger) TriggerBuilder.newTrigger().withIdentity("Trigger1",simpliJob.getSimpliGroup()).startAt(DateBuilder.dateOf(simpliJob.getStartTime().get(Calendar.HOUR_OF_DAY), simpliJob.getStartTime().get(Calendar.MINUTE), simpliJob.getStartTime().get(Calendar.SECOND), simpliJob.getStartTime().get(Calendar.DAY_OF_MONTH),simpliJob.getStartTime().get(Calendar.MONTH),simpliJob.getStartTime().get(Calendar.YEAR))).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobA.REPEATINTERVALINMILLISECONDS).repeatForever()).forJob(jobDetail1).build();
 			scheduler.scheduleJob(jobDetail1,trigger1);
 			System.out.println("BusinessObjectA Scheduled!");
 		}
 		if(simpliJob.getId()==2)
 		{
 			jobDetail2=JobBuilder.newJob(BusinessJobB.class).withIdentity(simpliJob.getName(),simpliJob.getSimpliGroup()).build();
-			trigger2=(SimpleTrigger) TriggerBuilder.newTrigger().withIdentity("Trigger2",simpliJob.getSimpliGroup()).startAt(simpliJob.getStartTime().getTime()).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobB.REPEATINTERVALINMILLISECONDS).repeatForever()).build();
+			trigger2=(Trigger) TriggerBuilder.newTrigger().withIdentity("Trigger2",simpliJob.getSimpliGroup()).startAt(DateBuilder.dateOf(simpliJob.getStartTime().get(Calendar.HOUR_OF_DAY), simpliJob.getStartTime().get(Calendar.MINUTE), simpliJob.getStartTime().get(Calendar.SECOND), simpliJob.getStartTime().get(Calendar.DAY_OF_MONTH),simpliJob.getStartTime().get(Calendar.MONTH),simpliJob.getStartTime().get(Calendar.YEAR))).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobB.REPEATINTERVALINMILLISECONDS).repeatForever()).forJob(jobDetail2).build();
 			scheduler.scheduleJob(jobDetail2,trigger2);
 			System.out.println("BusinessObjectB Scheduled!");
 		}
 		if(simpliJob.getId()==3)
 		{
 			jobDetail3=JobBuilder.newJob(BusinessJobC.class).withIdentity(simpliJob.getName(),simpliJob.getSimpliGroup()).build();
-			trigger3=(SimpleTrigger) TriggerBuilder.newTrigger().withIdentity("Trigger3",simpliJob.getSimpliGroup()).startAt(simpliJob.getStartTime().getTime()).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobC.REPEATINTERVALINMILLISECONDS).repeatForever()).build();
+			trigger3=(Trigger) TriggerBuilder.newTrigger().withIdentity("Trigger3",simpliJob.getSimpliGroup()).startAt(DateBuilder.dateOf(simpliJob.getStartTime().get(Calendar.HOUR_OF_DAY), simpliJob.getStartTime().get(Calendar.MINUTE), simpliJob.getStartTime().get(Calendar.SECOND), simpliJob.getStartTime().get(Calendar.DAY_OF_MONTH),simpliJob.getStartTime().get(Calendar.MONTH),simpliJob.getStartTime().get(Calendar.YEAR))).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobC.REPEATINTERVALINMILLISECONDS).repeatForever()).forJob(jobDetail3).build();
 			scheduler.scheduleJob(jobDetail3,trigger3);
 			System.out.println("BusinessObjectC Scheduled!");
 		}
 		if(simpliJob.getId()==4)
 		{
 			jobDetail4=JobBuilder.newJob(BusinessJobD.class).withIdentity(simpliJob.getName(),simpliJob.getSimpliGroup()).build();
-			trigger4=(SimpleTrigger) TriggerBuilder.newTrigger().withIdentity("Trigger4",simpliJob.getSimpliGroup()).startAt(simpliJob.getStartTime().getTime()).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobD.REPEATINTERVALINMILLISECONDS).repeatForever()).build();
+			trigger4=(Trigger) TriggerBuilder.newTrigger().withIdentity("Trigger4",simpliJob.getSimpliGroup()).startAt(DateBuilder.dateOf(simpliJob.getStartTime().get(Calendar.HOUR_OF_DAY), simpliJob.getStartTime().get(Calendar.MINUTE), simpliJob.getStartTime().get(Calendar.SECOND), simpliJob.getStartTime().get(Calendar.DAY_OF_MONTH),simpliJob.getStartTime().get(Calendar.MONTH),simpliJob.getStartTime().get(Calendar.YEAR))).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(BusinessJobD.REPEATINTERVALINMILLISECONDS).repeatForever()).forJob(jobDetail4).build();
 			scheduler.scheduleJob(jobDetail4,trigger4);
 			System.out.println("BusinessObjectD Scheduled!");
 		}
@@ -73,7 +77,6 @@ public class QuartzSchedulerController {
 		{
 			System.err.println("Job Already Scheduled!");
 		}
-		scheduler.start();
 	}
 	
 	public void unscheduleJob(SimpliJob simpliJob) throws SchedulerException
