@@ -1,8 +1,6 @@
 package org.eko.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.annotation.PostConstruct;
@@ -10,14 +8,12 @@ import javax.transaction.Transactional;
 
 import org.eko.entity.SimpliJob;
 import org.eko.repository.SimpliJobRepository;
-import org.eko.rest.InputJsonSimpliJob;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Transactional
 @Service
@@ -42,22 +38,24 @@ public class InitDbService {
 			simpliJob1.setStatus(1);
 			simpliJobRepository.save(simpliJob1);
 		}
-		else
+		else if(simpliJob1.getStatus()==2)
 		{
 			simpliJob1.setStatus(1);
 			simpliJobRepository.save(simpliJob1);
 		}
 		
 		SimpliJob simpliJob2=simpliJobRepository.findByName("Job2");
-		if(simpliJob2==null){
-		simpliJob2=new SimpliJob();
-		simpliJob2.setName("Job2");
-		simpliJob2.setSimpliGroup("Group1");
-		simpliJob2.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 7));
-		simpliJob2.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 10));
-		simpliJob2.setStatus(1);
-		simpliJobRepository.save(simpliJob2);}
-		else
+		if(simpliJob2==null)
+		{
+			simpliJob2=new SimpliJob();
+			simpliJob2.setName("Job2");
+			simpliJob2.setSimpliGroup("Group1");
+			simpliJob2.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 7));
+			simpliJob2.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 10));
+			simpliJob2.setStatus(1);
+			simpliJobRepository.save(simpliJob2);
+		}
+		else if(simpliJob2.getStatus()==2)
 		{
 			simpliJob2.setStatus(1);
 			simpliJobRepository.save(simpliJob2);
@@ -74,7 +72,7 @@ public class InitDbService {
 			simpliJob3.setStatus(1);
 			simpliJobRepository.save(simpliJob3);
 		}
-		else
+		else if(simpliJob3.getStatus()==2)
 		{
 			simpliJob3.setStatus(1);
 			simpliJobRepository.save(simpliJob3);
@@ -91,7 +89,7 @@ public class InitDbService {
 			simpliJob4.setStatus(1);
 			simpliJobRepository.save(simpliJob4);
 		}
-		else
+		else if(simpliJob4.getStatus()==2)
 		{
 			simpliJob4.setStatus(1);
 			simpliJobRepository.save(simpliJob4);
