@@ -26,13 +26,13 @@ public class SimpliJobRestController {
 		SimpliJob simpliJob=simpliJobService.findOne(id);
 		if(simpliJob != null){
 		quartzSchedulerController.unscheduleJob(simpliJob);
-		return "redirect:/";
 		}
 		else
 		{
 			System.err.println("Obejct is null");
-			return "redirect:/";
+			
 		}
+		return "redirect:/";
 	}
 	@RequestMapping(value="/simplijob/rest/schedule/{id}", method=RequestMethod.PUT)
 	public @ResponseBody String scheduleSimpliJob(@PathVariable int id) throws SchedulerException
@@ -40,12 +40,12 @@ public class SimpliJobRestController {
 		SimpliJob simpliJob=simpliJobService.findOne(id);
 		if(simpliJob != null){
 		quartzSchedulerController.scheduleJob(simpliJob);
-		return "redirect:/";
 		}
 		else
 		{
 			System.err.println("Obejct is null");
-			return "redirect:/";
+			
 		}
+		return "redirect:/";
 	}
 }

@@ -25,13 +25,12 @@ public class SimpliJobController {
 		SimpliJob simpliJob=simpliJobService.findOne(id);
 		if(simpliJob != null){
 		quartzSchedulerController.unscheduleJob(simpliJob);
-		return "redirect:/";
 		}
 		else
 		{
 			System.err.println("Obejct is null");
-			return "redirect:";
 		}
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/simplijob/schedule/{id}")
@@ -40,12 +39,11 @@ public class SimpliJobController {
 		SimpliJob simpliJob=simpliJobService.findOne(id);
 		if(simpliJob != null){
 		quartzSchedulerController.scheduleJob(simpliJob);
-		return "redirect:/";
 		}
 		else
 		{
 			System.err.println("Obejct is null");
-			return "redirect:/";
 		}
+		return "redirect:/";
 	}
 }
