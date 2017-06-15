@@ -45,7 +45,6 @@ public class SimpliJobRestController {
 		{
 			if(inputJsonSimpliJobDS.getStatus()==1&&simpliJob.getId()==id)
 			{
-				simpliJobRepository.save(simpliJob);
 				quartzSchedulerController.unscheduleJob(simpliJob);
 				outputJsonSimpliJob.setResult("Successfully Descheduled");
 				outputJsonSimpliJob.setDescription("Job is Descheduled");
@@ -70,6 +69,7 @@ public class SimpliJobRestController {
 		{
 			simpliJob.setStartTime(inputJsonSimpliJob.getStartTime());
 			simpliJobRepository.save(simpliJob);
+			simpliJob=simpliJobRepository.findOne(id);
 			if(inputJsonSimpliJob.getStatus()==2&&simpliJob.getId()==id)
 			{
 				quartzSchedulerController.scheduleJob(simpliJob);
