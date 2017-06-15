@@ -58,6 +58,7 @@ public class SimpliJobRestController {
 		}
 		return outputJsonSimpliJob;
 	}
+	
 	@RequestMapping(value="/schedule/{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody OutputJsonSimpliJob scheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJob inputJsonSimpliJob) throws SchedulerException
 	{
@@ -147,6 +148,7 @@ public class SimpliJobRestController {
 		}
 		return returnMessage;
 	}
+	
 	@RequestMapping(value="/add" ,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody SimpliJobDetails addSimpliJobs(@RequestBody SimpliJobDetails simpliJobDetails)
 	{
