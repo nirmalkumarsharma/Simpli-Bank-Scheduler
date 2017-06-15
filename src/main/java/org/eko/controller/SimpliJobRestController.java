@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="/simplijob/rest", produces = { "application/json" }, consumes = MediaType.ALL_VALUE)
+@RequestMapping(value="/simplijob/rest", consumes = MediaType.ALL_VALUE)
 public class SimpliJobRestController {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class SimpliJobRestController {
 	@Autowired
 	private QuartzSchedulerController quartzSchedulerController;
 	
-	@RequestMapping(value="/deschedule/{id}",method=RequestMethod.PUT)
+	@RequestMapping(value="/deschedule/{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody OutputJsonSimpliJob unscheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJobDS inputJsonSimpliJobDS) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
@@ -58,7 +58,7 @@ public class SimpliJobRestController {
 		}
 		return outputJsonSimpliJob;
 	}
-	@RequestMapping(value="/schedule/{id}",method=RequestMethod.PUT)
+	@RequestMapping(value="/schedule/{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody OutputJsonSimpliJob scheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJob inputJsonSimpliJob) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
@@ -91,8 +91,8 @@ public class SimpliJobRestController {
 		return outputJsonSimpliJob;
 	}
 	
-	@RequestMapping(value="/list/{status}" ,method=RequestMethod.GET)
-	public @ResponseBody List<SimpliJob> getSimpliJobs(@PathVariable int status)
+	@RequestMapping(value="/list/status/{status}" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<SimpliJob> getSimpliJobsByStatus(@PathVariable int status)
 	{
 		List<SimpliJob> simpliJobList=null;
 		
@@ -100,14 +100,37 @@ public class SimpliJobRestController {
 		{
 			simpliJobList=simpliJobRepository.findByStatus(status);
 		}
-		if(status==0)
-		{
-			simpliJobList=simpliJobRepository.findAll();
-		}
 		return simpliJobList;
 	}
 	
-	@RequestMapping(value="/delete/{id}" ,method=RequestMethod.DELETE)
+	@RequestMapping(value="/list/id/{id}" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody SimpliJob getSimpliJobsById(@PathVariable int id)
+	{
+		return simpliJobRepository.findOne(id);
+	}
+	
+	@RequestMapping(value="/list/name/{name}" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody SimpliJob getSimpliJobsByName(@PathVariable String name)
+	{
+		return simpliJobRepository.findByName(name);
+	}
+	
+	@RequestMapping(value="/list" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<SimpliJob> getAllSimpliJobs()
+	{
+		List<SimpliJob> simpliJobList=null;
+		simpliJobList=simpliJobRepository.findAll();
+		return simpliJobList;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ReturnMessage applicationRunningMessage()
+	{
+		ReturnMessage returnMessage=new ReturnMessage(0,"Application is running");
+		return returnMessage;
+	}
+	
+	@RequestMapping(value="/delete/{id}" ,method=RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ReturnMessage deleteSimpliJobs(@PathVariable int id)
 	{
 		ReturnMessage returnMessage=new ReturnMessage();
@@ -120,11 +143,11 @@ public class SimpliJobRestController {
 		else
 		{
 			simpliJobRepository.delete(simpliJob);
-			returnMessage.setMessage("successfully deleted");
+			returnMessage.setMessage("Successfully deleted");
 		}
 		return returnMessage;
 	}
-	@RequestMapping(value="/add" ,method=RequestMethod.POST)
+	@RequestMapping(value="/add" ,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody SimpliJobDetails addSimpliJobs(@RequestBody SimpliJobDetails simpliJobDetails)
 	{
 		return simpliJobDetails;
