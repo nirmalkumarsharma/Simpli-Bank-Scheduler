@@ -19,7 +19,7 @@ public class SimpliJobController {
 	@Autowired
 	private QuartzSchedulerController quartzSchedulerController;
 
-	@RequestMapping("/simplijob/unschedule/{id}")
+	@RequestMapping("/simplijob/deschedule/{id}")
 	public String unscheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);

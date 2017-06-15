@@ -1,23 +1,19 @@
 package org.eko.rest;
 
-import java.util.Calendar;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class InputJsonSimpliJob{
+public class InputJsonSimpliJobDS{
 	
 	private int id;
-	private Calendar startTime;
 	private int status;
 
-	public InputJsonSimpliJob() {
+	public InputJsonSimpliJobDS() {
 		super();
 	}
-	public InputJsonSimpliJob(int id, Calendar startTime, int status) {
+	public InputJsonSimpliJobDS(int id, int status) {
 		super();
 		this.id = id;
-		this.startTime = startTime;
 		this.status = status;
 	}
 	public int getId() {
@@ -25,12 +21,6 @@ public class InputJsonSimpliJob{
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public Calendar getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(Calendar startTime) {
-		this.startTime = startTime;
 	}
 	public int getStatus() {
 		return status;

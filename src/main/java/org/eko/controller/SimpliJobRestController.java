@@ -1,9 +1,14 @@
 package org.eko.controller;
 
+import java.util.List;
+
 import org.eko.entity.SimpliJob;
 import org.eko.repository.SimpliJobRepository;
 import org.eko.rest.InputJsonSimpliJob;
+import org.eko.rest.InputJsonSimpliJobDS;
 import org.eko.rest.OutputJsonSimpliJob;
+import org.eko.rest.ReturnMessage;
+import org.eko.rest.SimpliJobDetails;
 import org.eko.service.SimpliJobService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value="/simplijob/rest", produces = { "application/json" }, consumes = MediaType.ALL_VALUE)
 public class SimpliJobRestController {
 
 	@Autowired
@@ -27,8 +33,8 @@ public class SimpliJobRestController {
 	@Autowired
 	private QuartzSchedulerController quartzSchedulerController;
 	
-	@RequestMapping(value="/simplijob/rest/unschedule/{id}", method=RequestMethod.PUT,produces = { "application/json" }, consumes = MediaType.ALL_VALUE)
-	public @ResponseBody OutputJsonSimpliJob unscheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJob inputJsonSimpliJob) throws SchedulerException
+	@RequestMapping(value="/deschedule/{id}",method=RequestMethod.PUT)
+	public @ResponseBody OutputJsonSimpliJob unscheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJobDS inputJsonSimpliJobDS) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
 		
@@ -37,7 +43,7 @@ public class SimpliJobRestController {
 		
 		if(simpliJob != null)
 		{
-			if(inputJsonSimpliJob.getStatus()==1&&simpliJob.getId()==id)
+			if(inputJsonSimpliJobDS.getStatus()==1&&simpliJob.getId()==id)
 			{
 				simpliJobRepository.save(simpliJob);
 				quartzSchedulerController.unscheduleJob(simpliJob);
@@ -53,7 +59,7 @@ public class SimpliJobRestController {
 		}
 		return outputJsonSimpliJob;
 	}
-	@RequestMapping(value="/simplijob/rest/schedule/{id}", method=RequestMethod.PUT,produces = { "application/json" }, consumes = MediaType.ALL_VALUE)
+	@RequestMapping(value="/schedule/{id}",method=RequestMethod.PUT)
 	public @ResponseBody OutputJsonSimpliJob scheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJob inputJsonSimpliJob) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobService.findOne(id);
@@ -83,5 +89,44 @@ public class SimpliJobRestController {
 			System.err.println("Obejct is null");
 		}
 		return outputJsonSimpliJob;
+	}
+	
+	@RequestMapping(value="/list/{status}" ,method=RequestMethod.GET)
+	public @ResponseBody List<SimpliJob> getSimpliJobs(@PathVariable int status)
+	{
+		List<SimpliJob> simpliJobList=null;
+		
+		if(status==1 || status==2)
+		{
+			simpliJobList=simpliJobRepository.findByStatus(status);
+		}
+		if(status==0)
+		{
+			simpliJobList=simpliJobRepository.findAll();
+		}
+		return simpliJobList;
+	}
+	
+	@RequestMapping(value="/delete/{id}" ,method=RequestMethod.DELETE)
+	public @ResponseBody ReturnMessage deleteSimpliJobs(@PathVariable int id)
+	{
+		ReturnMessage returnMessage=new ReturnMessage();
+		returnMessage.setId(id);
+		SimpliJob simpliJob=simpliJobRepository.findOne(id);
+		if(simpliJob==null)
+		{
+			returnMessage.setMessage("No such Jobs");
+		}
+		else
+		{
+			simpliJobRepository.delete(simpliJob);
+			returnMessage.setMessage("successfully deleted");
+		}
+		return returnMessage;
+	}
+	@RequestMapping(value="/add" ,method=RequestMethod.POST)
+	public @ResponseBody SimpliJobDetails addSimpliJobs(@RequestBody SimpliJobDetails simpliJobDetails)
+	{
+		return simpliJobDetails;
 	}
 }

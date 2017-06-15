@@ -49,7 +49,7 @@
 		<td><fmt:formatDate type="both" dateStyle="full" value="${simplijob.endTime.time}" var="eTime" />
 				<c:out value="${eTime}" /></td>
 		<td><a href="<spring:url value="/simplijob/schedule/${simplijob.id}.html" />" class="btn btn-lg btn-primary">Schedule </a> </td>
-		<td><a href="<spring:url value="/simplijob/unschedule/${simplijob.id}.html" />"	class="btn btn-lg btn-danger btn-primary">Deschedule </a> </td>
+		<td><a href="<spring:url value="/simplijob/deschedule/${simplijob.id}.html" />"	class="btn btn-lg btn-danger btn-primary">Deschedule </a> </td>
 		<td><c:out value="${simplijob.status}"></c:out></td>
 					</tr>
 				</c:forEach>
