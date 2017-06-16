@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
-import org.eko.BusinessJobs.Job1;
 import org.eko.entity.SimpliJob;
 import org.eko.repository.SimpliJobRepository;
 import org.quartz.SchedulerException;
@@ -21,9 +20,6 @@ public class InitDbService {
 	
 	@Autowired
 	private SimpliJobRepository simpliJobRepository;
-	
-	@Autowired
-	private Job1 job1;
 	
 	@PostConstruct
 	public void init() throws SchedulerException, JsonGenerationException, JsonMappingException, IOException
