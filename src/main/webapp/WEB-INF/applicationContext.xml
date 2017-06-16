@@ -5,11 +5,13 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<context:component-scan base-package="org.eko">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -52,9 +54,9 @@
     	
     	<!-- Pool properties -->
     	<property name="minPoolSize" value="5" />
-    	<property name="maxPoolSize" value="20" />
+    	<property name="maxPoolSize" value="200" />
     	<property name="acquireIncrement" value="1" />
-    	<property name="maxStatements" value="50" />
+    	<property name="maxStatements" value="500" />
     	<property name="idleConnectionTestPeriod" value="3000" />
     	<property name="loginTimeout" value="300" />
  	</bean>  
@@ -63,4 +65,63 @@
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"	id="transactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+<!-- 	
+	<bean id="Job1" class="org.eko.jobs.BusinessJobA">
+    	<property name="sessionFactory" ref="sessionFactory"> </property>
+	</bean>
+	
+	<bean name="BusinessJobA" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass">
+            <bean factory-bean="Job1" factory-method="setJob1"></bean>
+        </property>
+	</bean>
+	
+ 	<bean id="BusinessJobA" class="org.eko.jobs.BusinessJobA" />
+
+ 	-->
+ 	
+ 	<bean id="quartzJobFactory" class="org.eko.configuration.AutowiringSpringBeanJobFactory">
+    	<property name="ignoredUnknownProperties" value="applicationContext"/>
+	</bean>    
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    	<property name="dataSource" ref="dataSource"/>
+    	<property name="transactionManager" ref="transactionManager"/>
+    	<property name="jobFactory" ref="quartzJobFactory"/>
+		<property name="overwriteExistingJobs" value="true"/> 
+    
+    	<property name="autoStartup" value="true" />
+    	<property name="schedulerName" value="quartzScheduler"/>
+    	<property name="applicationContextSchedulerContextKey" value="applicationContext"/>
+	    <property name="waitForJobsToCompleteOnShutdown" value="false"/>
+	    <property name="configLocation" value="classpath:quartz.properties" />
+    	<property name="quartzProperties">
+        <props>
+            <prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+            <prop key="org.quartz.threadPool.threadCount">50</prop>
+            <prop key="org.quartz.scheduler.instanceName">AUTO</prop>
+            <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+            <prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>
+            <prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+            <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+        </props>
+    </property>
+</bean>
+
+<bean id="BusinessObjectA" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    <property name="jobClass" value="org.eko.jobs.BusinessJobA"/>
+</bean>
+
+<bean id="BusinessObjectB" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    <property name="jobClass" value="org.eko.jobs.BusinessJobB"/>
+</bean>
+
+<bean id="BusinessObjectC" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    <property name="jobClass" value="org.eko.jobs.BusinessJobC"/>
+</bean>
+
+<bean id="BusinessObjectD" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    <property name="jobClass" value="org.eko.jobs.BusinessJobD"/>
+</bean>
+
 </beans>

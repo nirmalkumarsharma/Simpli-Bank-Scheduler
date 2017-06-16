@@ -10,4 +10,6 @@ public interface SimpliJobRepository extends JpaRepository<SimpliJob, Integer>
 	SimpliJob findByName(String name);
 
 	List<SimpliJob> findByStatus(int status);
+
+	SimpliJob findTopByOrderByNameDesc();
 }

@@ -7,13 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.quartz.DisallowConcurrentExecution;
-import org.quartz.InterruptableJob;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.quartz.UnableToInterruptJobException;
-
 @Entity
 public class SimpliJob{
 
@@ -74,5 +67,10 @@ public class SimpliJob{
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	@Override
+	public String toString() {
+		return "SimpliJob [id=" + id + ", name=" + name + ", simpliGroup=" + simpliGroup + ", startTime=" + startTime
+				+ ", endTime=" + endTime + ", status=" + status + "]";
 	}
 }

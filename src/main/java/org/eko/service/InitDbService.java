@@ -2,10 +2,10 @@ package org.eko.service;
 
 import java.io.IOException;
 import java.util.GregorianCalendar;
-
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
+import org.eko.BusinessJobs.Job1;
 import org.eko.entity.SimpliJob;
 import org.eko.repository.SimpliJobRepository;
 import org.quartz.SchedulerException;
@@ -22,6 +22,9 @@ public class InitDbService {
 	@Autowired
 	private SimpliJobRepository simpliJobRepository;
 	
+	@Autowired
+	private Job1 job1;
+	
 	@PostConstruct
 	public void init() throws SchedulerException, JsonGenerationException, JsonMappingException, IOException
 	{
@@ -33,8 +36,8 @@ public class InitDbService {
 			simpliJob1=new SimpliJob();
 			simpliJob1.setName("Job1");
 			simpliJob1.setSimpliGroup("Group1");
-			simpliJob1.setStartTime(new GregorianCalendar(2017, 6, 14, 11, 27, 1));
-			simpliJob1.setEndTime(new GregorianCalendar(2017, 6, 14, 11, 27, 59));
+			simpliJob1.setStartTime(new GregorianCalendar(2017, 5, 14, 11, 27, 1));
+			simpliJob1.setEndTime(new GregorianCalendar(2017, 5, 14, 11, 27, 59));
 			simpliJob1.setStatus(1);
 			simpliJobRepository.save(simpliJob1);
 		}
