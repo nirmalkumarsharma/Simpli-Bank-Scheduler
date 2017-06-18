@@ -86,7 +86,7 @@ public class SimpliJobRestController {
 		else
 		{
 			outputJsonSimpliJob.setResult("Scheduling Failed");
-			outputJsonSimpliJob.setDescription("The Job isunable to set");
+			outputJsonSimpliJob.setDescription("The Job is unable to set");
 			System.err.println("Obejct is null");
 		}
 		return outputJsonSimpliJob;
