@@ -1,6 +1,5 @@
 package org.eko.service;
 
-import java.io.IOException;
 import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -11,9 +10,6 @@ import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 @Transactional
 @Service
 public class InitDbService {
@@ -22,7 +18,7 @@ public class InitDbService {
 	private SimpliJobRepository simpliJobRepository;
 	
 	@PostConstruct
-	public void init() throws SchedulerException, JsonGenerationException, JsonMappingException, IOException
+	public void init() throws SchedulerException
 	{
 		System.out.println("Initiliazing Application");
 		
