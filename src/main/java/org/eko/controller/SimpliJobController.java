@@ -27,7 +27,7 @@ public class SimpliJobController {
 		}
 		else
 		{
-			System.err.println("Obejct is null");
+			System.err.println("Object is null");
 		}
 		return "redirect:/";
 	}
@@ -42,7 +42,7 @@ public class SimpliJobController {
 		}
 		else
 		{
-			System.err.println("Obejct is null");
+			System.err.println("Object is null");
 		}
 		return "redirect:/";
 	}
