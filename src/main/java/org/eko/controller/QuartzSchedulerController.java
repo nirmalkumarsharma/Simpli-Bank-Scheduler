@@ -85,22 +85,22 @@ public class QuartzSchedulerController {
 		if(simpliJob.getId()==1)
 		{
 			scheduler.unscheduleJob(trigger1.getKey());
-			System.out.println("BusinessObjectA Unscheduled!");
+			System.out.println("BusinessObjectA descheduled!");
 		}
 		if(simpliJob.getId()==2)
 		{
 			scheduler.unscheduleJob(trigger2.getKey());
-			System.out.println("BusinessObjectB Unscheduled!");
+			System.out.println("BusinessObjectB descheduled!");
 		}
 		if(simpliJob.getId()==3)
 		{
 			scheduler.unscheduleJob(trigger3.getKey());
-			System.out.println("BusinessObjectC Unscheduled!");
+			System.out.println("BusinessObjectC descheduled!");
 		}
 		if(simpliJob.getId()==4)
 		{
 			scheduler.unscheduleJob(trigger4.getKey());
-			System.out.println("BusinessObjectD Unscheduled!");
+			System.out.println("BusinessObjectD descheduled!");
 		}
 		simpliJob.setStatus(1);
 		simpliJobRepository.save(simpliJob);
