@@ -9,7 +9,6 @@ import org.eko.rest.InputJsonSimpliJobDS;
 import org.eko.rest.OutputJsonSimpliJob;
 import org.eko.rest.ReturnMessage;
 import org.eko.rest.SimpliJobDetails;
-import org.eko.service.SimpliJobService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,9 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SimpliJobRestController {
 
 	@Autowired
-	private SimpliJobService simpliJobService;
-	
-	@Autowired
 	private SimpliJobRepository simpliJobRepository;
 	
 	@Autowired
@@ -36,7 +32,7 @@ public class SimpliJobRestController {
 	@RequestMapping(value="/deschedule/{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody OutputJsonSimpliJob unscheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJobDS inputJsonSimpliJobDS) throws SchedulerException
 	{
-		SimpliJob simpliJob=simpliJobService.findOne(id);
+		SimpliJob simpliJob=simpliJobRepository.findOne(id);
 		
 		OutputJsonSimpliJob outputJsonSimpliJob=new OutputJsonSimpliJob();
 		outputJsonSimpliJob.setId(id);
@@ -62,7 +58,7 @@ public class SimpliJobRestController {
 	@RequestMapping(value="/schedule/{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody OutputJsonSimpliJob scheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJob inputJsonSimpliJob) throws SchedulerException
 	{
-		SimpliJob simpliJob=simpliJobService.findOne(id);
+		SimpliJob simpliJob=simpliJobRepository.findOne(id);
 		
 		OutputJsonSimpliJob outputJsonSimpliJob=new OutputJsonSimpliJob();
 		outputJsonSimpliJob.setId(id);

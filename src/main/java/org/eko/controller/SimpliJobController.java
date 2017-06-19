@@ -1,7 +1,7 @@
 package org.eko.controller;
 
 import org.eko.entity.SimpliJob;
-import org.eko.service.SimpliJobService;
+import org.eko.repository.SimpliJobRepository;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SimpliJobController {
 	
 	@Autowired
-	private SimpliJobService simpliJobService;
+	private SimpliJobRepository simpliJobRepository;
 	
 	@Autowired
 	private QuartzSchedulerController quartzSchedulerController;
@@ -20,7 +20,7 @@ public class SimpliJobController {
 	@RequestMapping("/simplijob/deschedule/{id}")
 	public String unscheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
-		SimpliJob simpliJob=simpliJobService.findOne(id);
+		SimpliJob simpliJob=simpliJobRepository.findOne(id);
 		if(simpliJob != null)
 		{
 			quartzSchedulerController.unscheduleJob(simpliJob);
@@ -35,7 +35,7 @@ public class SimpliJobController {
 	@RequestMapping("/simplijob/schedule/{id}")
 	public String scheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
-		SimpliJob simpliJob=simpliJobService.findOne(id);
+		SimpliJob simpliJob=simpliJobRepository.findOne(id);
 		if(simpliJob != null)
 		{
 			quartzSchedulerController.scheduleJob(simpliJob);
