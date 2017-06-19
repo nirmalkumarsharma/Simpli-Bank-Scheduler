@@ -20,7 +20,7 @@ public class InitDbService {
 	@PostConstruct
 	public void init() throws SchedulerException
 	{
-		System.out.println("Initiliazing Application");
+		System.out.println("Initializing Application");
 		
 		SimpliJob simpliJob1=simpliJobRepository.findByName("Job1");
 		if(simpliJob1==null)
