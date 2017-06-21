@@ -78,7 +78,7 @@
 	
  	<bean id="BusinessJobA" class="org.eko.jobs.BusinessJobA" />
 
- 	-->
+ 	
  	
  	<bean id="quartzJobFactory" class="org.eko.configuration.AutowiringSpringBeanJobFactory">
     	<property name="ignoredUnknownProperties" value="applicationContext"/>
@@ -123,5 +123,5 @@
 <bean id="BusinessObjectD" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
     <property name="jobClass" value="org.eko.jobs.BusinessJobD"/>
 </bean>
-
+-->
 </beans>

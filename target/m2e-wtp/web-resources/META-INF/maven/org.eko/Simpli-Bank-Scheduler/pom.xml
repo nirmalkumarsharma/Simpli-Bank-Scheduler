@@ -9,7 +9,7 @@
   
   
   <properties>
-  	<org.springframework.version>4.3.8.RELEASE</org.springframework.version>
+  	<org.springframework.version>4.3.9.RELEASE</org.springframework.version>
   	<org.quartz.version>2.3.0</org.quartz.version>
   </properties>
   

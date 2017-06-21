@@ -13,47 +13,43 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SimpliBank Scheduler</title>
-
-</head>
-<body>
-<center>
-
-<table class="table" border="2">
-			<thead>
-				<tr>
-					<th colspan="8" align="center"> <center> SimpliBank Scheduler </center></th>
-				</tr>
-				<tr>
-					<th>Task ID</th>
-					<th>Task name</th>
-					<th>Task Group</th>
-					<th>Task Start Time</th>
-					<th>Task End Time</th>
-					<th>Schedule</th>
-					<th>Deschedule</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${simplijobs}" var="simplijob">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>SimpliBank Scheduler</title>
+	</head>
+	<body>
+		<center>
+			<table class="table table-hover" border="2">
+				<thead>
 					<tr>
-						<td><c:out value="${simplijob.id}" /></td>
-						<td><c:out value="${simplijob.name}" /></td>
-						<td><c:out value="${simplijob.simpliGroup}" /></td>
-			
-		<td><fmt:formatDate type="both" dateStyle="full" value="${simplijob.startTime.time}" var="sTime" />
-				<c:out value="${sTime}" /></td>
-		<td><fmt:formatDate type="both" dateStyle="full" value="${simplijob.endTime.time}" var="eTime" />
-				<c:out value="${eTime}" /></td>
-		<td><a href="<spring:url value="/simplijob/schedule/${simplijob.id}.html" />" class="btn btn-lg btn-primary">Schedule </a> </td>
-		<td><a href="<spring:url value="/simplijob/deschedule/${simplijob.id}.html" />"	class="btn btn-lg btn-danger btn-primary">Deschedule </a> </td>
-		<td><c:out value="${simplijob.status}"></c:out></td>
+						<th colspan="8" align="center"> <center> SimpliBank Scheduler </center></th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table></center>
+					<tr>
+						<th>Task ID</th>
+						<th>Task name</th>
+						<th>Task Group</th>
+						<th>Task Start Time</th>
+						<th>Task End Time</th>
+						<th>Schedule</th>
+						<th>Deschedule</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${simplijobs}" var="simplijob">
+						<tr>
+							<td><c:out value="${simplijob.id}" /></td>
+							<td><c:out value="${simplijob.name}" /></td>
+							<td><c:out value="${simplijob.simpliGroup}" /></td>
+							<td><fmt:formatDate type="both" dateStyle="full" value="${simplijob.startTime.time}" var="sTime" /><c:out value="${sTime}" /></td>
+							<td><fmt:formatDate type="both" dateStyle="full" value="${simplijob.endTime.time}" var="eTime" /><c:out value="${eTime}" /></td>
+							<td><a href="<spring:url value="/simplijob/schedule/${simplijob.id}.html" />" class="btn btn-lg btn-primary">Schedule</a></td>
+							<td><a href="<spring:url value="/simplijob/deschedule/${simplijob.id}.html" />"	class="btn btn-lg btn-danger btn-primary">Deschedule</a></td>
+							<td><c:out value="${simplijob.status}"></c:out></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</center>
 	</body>
 </html>
