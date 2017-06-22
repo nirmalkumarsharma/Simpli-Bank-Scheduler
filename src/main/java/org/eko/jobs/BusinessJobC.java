@@ -5,16 +5,15 @@ import org.eko.BusinessJobs.Job2;
 import org.eko.BusinessJobs.Job3;
 import org.eko.BusinessJobs.Job4;
 import org.quartz.DisallowConcurrentExecution;
-import org.quartz.InterruptableJob;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.UnableToInterruptJobException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+
 @DisallowConcurrentExecution
-public class BusinessJobC implements Job, InterruptableJob
+public class BusinessJobC extends QuartzJobBean
 {
 	public static int REPEATINTERVALINMILLISECONDS=2000;
 	public static int REPEATCOUNT=20;
@@ -30,15 +29,9 @@ public class BusinessJobC implements Job, InterruptableJob
 	
 	@Autowired
 	Job4 job4;
-	
-	@Override
-	public void interrupt() throws UnableToInterruptJobException
-	{
-		
-	}
 
 	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
+	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
 		
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 
