@@ -10,6 +10,7 @@ import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@org.springframework.transaction.annotation.Transactional
 @Transactional
 @Service
 public class InitDbService {
