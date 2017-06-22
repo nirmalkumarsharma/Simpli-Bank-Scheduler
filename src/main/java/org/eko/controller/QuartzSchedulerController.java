@@ -8,6 +8,7 @@ import org.eko.jobs.BusinessJobB;
 import org.eko.jobs.BusinessJobC;
 import org.eko.jobs.BusinessJobD;
 import org.eko.repository.SimpliJobRepository;
+import org.eko.service.InitDbService;
 import org.quartz.DateBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -39,7 +40,6 @@ public class QuartzSchedulerController {
 	public void scheduleJob(SimpliJob simpliJob) throws SchedulerException
 	{
 		scheduler=new StdSchedulerFactory().getScheduler();
-		scheduler.start();
 		if(simpliJob.getStatus()==1){
 		if(simpliJob.getId()==1)
 		{
