@@ -8,7 +8,6 @@ import org.eko.jobs.BusinessJobB;
 import org.eko.jobs.BusinessJobC;
 import org.eko.jobs.BusinessJobD;
 import org.eko.repository.SimpliJobRepository;
-import org.eko.service.InitDbService;
 import org.quartz.DateBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
