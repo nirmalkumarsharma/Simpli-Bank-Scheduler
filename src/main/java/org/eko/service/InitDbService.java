@@ -19,7 +19,7 @@ public class InitDbService {
 	@PostConstruct
 	public void init()
 	{
-		System.out.println("Initializing Application");
+		System.out.println("\n-----------------Initializing Application-----------------");
 		
 		SimpliJob simpliJob1=simpliJobRepository.findByName("Job1");
 		if(simpliJob1==null)
