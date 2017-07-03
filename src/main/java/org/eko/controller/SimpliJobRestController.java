@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/*A Class to schedule or deschedule the jobs through RESTful API calls*/
 @RestController
 @RequestMapping(value="/simplijob/rest", consumes = MediaType.ALL_VALUE)
 public class SimpliJobRestController {
@@ -29,8 +30,9 @@ public class SimpliJobRestController {
 	@Autowired
 	private QuartzSchedulerController quartzSchedulerController;
 	
+	/* A utility function to deschedule the scheduled jobs with valid JSON request*/
 	@RequestMapping(value="/deschedule/{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody OutputJsonSimpliJob unscheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJobDS inputJsonSimpliJobDS) throws SchedulerException
+	public @ResponseBody OutputJsonSimpliJob descheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJobDS inputJsonSimpliJobDS) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobRepository.findOne(id);
 		
@@ -55,6 +57,7 @@ public class SimpliJobRestController {
 		return outputJsonSimpliJob;
 	}
 	
+	/* A utility function to schedule the unscheduled or descheduled jobs with the valid JSON request */
 	@RequestMapping(value="/schedule/{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody OutputJsonSimpliJob scheduleSimpliJob(@PathVariable int id,@RequestBody InputJsonSimpliJob inputJsonSimpliJob) throws SchedulerException
 	{
@@ -83,11 +86,12 @@ public class SimpliJobRestController {
 		{
 			outputJsonSimpliJob.setResult("Scheduling Failed");
 			outputJsonSimpliJob.setDescription("Unable to set the job");
-			System.err.println("Obejct is null");
+			System.err.println("Object is null");
 		}
 		return outputJsonSimpliJob;
 	}
 	
+	/* A utility function to list the jobs with the requested status of jobs i.e. sheduled/unscheduled through a valid JSON request */
 	@RequestMapping(value="/list/status/{status}" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<SimpliJob> getSimpliJobsByStatus(@PathVariable int status)
 	{
@@ -100,18 +104,21 @@ public class SimpliJobRestController {
 		return simpliJobList;
 	}
 	
+	/* A utility function to list the job with given id through a valid JSON request */
 	@RequestMapping(value="/list/id/{id}" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody SimpliJob getSimpliJobsById(@PathVariable int id)
 	{
 		return simpliJobRepository.findOne(id);
 	}
 	
+	/* A utility function to list the job with given name through a valid JSON request */
 	@RequestMapping(value="/list/name/{name}" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody SimpliJob getSimpliJobsByName(@PathVariable String name)
 	{
 		return simpliJobRepository.findByName(name);
 	}
 	
+	/* A utility function to all jobs through a valid JSON request */
 	@RequestMapping(value="/list" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<SimpliJob> getAllSimpliJobs()
 	{
@@ -120,6 +127,7 @@ public class SimpliJobRestController {
 		return simpliJobList;
 	}
 	
+	/* A utility function to check if application is running through a valid JSON request */
 	@RequestMapping(method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ReturnMessage applicationRunningMessage()
 	{
@@ -127,6 +135,7 @@ public class SimpliJobRestController {
 		return returnMessage;
 	}
 	
+	/* A utility function to delete the job with given id through a valid JSON request */
 	@RequestMapping(value="/delete/{id}" ,method=RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ReturnMessage deleteSimpliJobs(@PathVariable int id)
 	{
@@ -145,6 +154,7 @@ public class SimpliJobRestController {
 		return returnMessage;
 	}
 	
+	/* Does nothing just pass the JSON request as JSON response */
 	@RequestMapping(value="/add" ,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody SimpliJobDetails addSimpliJobs(@RequestBody SimpliJobDetails simpliJobDetails)
 	{

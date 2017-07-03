@@ -1,9 +1,9 @@
 package org.eko.jobs;
 
-import org.eko.BusinessJobs.Job1;
-import org.eko.BusinessJobs.Job2;
-import org.eko.BusinessJobs.Job3;
-import org.eko.BusinessJobs.Job4;
+import org.eko.businessjobs.Job1;
+import org.eko.businessjobs.Job2;
+import org.eko.businessjobs.Job3;
+import org.eko.businessjobs.Job4;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.InterruptableJob;
 import org.quartz.Job;
@@ -13,6 +13,7 @@ import org.quartz.UnableToInterruptJobException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+/* Business Jobs which are scheduled using quartz scheduler */
 @DisallowConcurrentExecution
 public class BusinessJobD implements Job, InterruptableJob
 {

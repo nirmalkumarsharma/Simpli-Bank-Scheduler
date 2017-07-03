@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/* A Class to define th blueprint of Job object */
 @Entity
 public class SimpliJob{
 

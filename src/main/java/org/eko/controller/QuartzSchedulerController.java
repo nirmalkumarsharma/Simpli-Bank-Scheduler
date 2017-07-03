@@ -20,6 +20,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+/* The Class to Scheduling and descheduling the Business Jobs */
 @Controller
 public class QuartzSchedulerController {
 	
@@ -36,6 +37,8 @@ public class QuartzSchedulerController {
 	@Autowired
 	private SimpliJobRepository simpliJobRepository;
 	
+	/* A utility function to schedule the job as requested through GUI or RESTful calling
+	 * Jobs Are scheduled as per the properties defined in as per the respected class*/
 	public void scheduleJob(SimpliJob simpliJob) throws SchedulerException
 	{
 		scheduler=new StdSchedulerFactory().getScheduler();
@@ -78,6 +81,7 @@ public class QuartzSchedulerController {
 		scheduler.start();
 	}
 	
+	/* A utility function to deschedule the job as requested through GUI or RESTful calling */
 	public void unscheduleJob(SimpliJob simpliJob) throws SchedulerException
 	{
 		if(simpliJob.getStatus()==2){

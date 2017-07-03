@@ -2,6 +2,7 @@ package org.eko.rest;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/* Class to map the output JSON response from the application after start, schedule or stopping the job */
 @XmlRootElement
 public class OutputJsonSimpliJob {
 	

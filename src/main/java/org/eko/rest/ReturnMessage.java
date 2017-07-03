@@ -2,6 +2,7 @@ package org.eko.rest;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/* Class to map the output JSON response from the application to send the message to the client */
 @XmlRootElement
 public class ReturnMessage {
 	

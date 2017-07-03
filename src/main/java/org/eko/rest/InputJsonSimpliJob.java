@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+
+/* Class to map the input JSON request from the client to start or schedule the job */
 @XmlRootElement
 public class InputJsonSimpliJob{
 	

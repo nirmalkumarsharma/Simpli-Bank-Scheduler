@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/* Class to map the SimpliJob class for Request and Response between application and the client*/
 @XmlRootElement
 public class SimpliJobDetails {
 

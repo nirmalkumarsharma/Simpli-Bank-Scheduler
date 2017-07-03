@@ -2,6 +2,7 @@ package org.eko.rest;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/* Class to map the input JSON request from the client to stop or deschedule the job */
 @XmlRootElement
 public class InputJsonSimpliJobDS{
 	

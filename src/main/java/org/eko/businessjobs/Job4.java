@@ -1,10 +1,11 @@
-package org.eko.BusinessJobs;
+package org.eko.businessjobs;
 
 import org.eko.entity.SimpliJob;
 import org.eko.repository.SimpliJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/* The Class with Jobs performed by Business Job objects */
 @Service
 public class Job4 {
 

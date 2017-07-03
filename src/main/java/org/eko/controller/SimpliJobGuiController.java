@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/*A Class to schedule or deschedule the jobs through GUI interface*/
 @Controller
-public class SimpliJobController {
+public class SimpliJobGuiController {
 	
 	@Autowired
 	private SimpliJobRepository simpliJobRepository;
@@ -17,8 +18,9 @@ public class SimpliJobController {
 	@Autowired
 	private QuartzSchedulerController quartzSchedulerController;
 
-	@RequestMapping("/simplijob/deschedule/{id}")
-	public String unscheduleSimpliJob(@PathVariable int id) throws SchedulerException
+	/* A utility function to deschedule the scheduled jobs*/
+	@RequestMapping("/simplijob/deschedule/{id}") //id defines the job to be deschedule
+	public String descheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobRepository.findOne(id);
 		if(simpliJob != null)
@@ -32,7 +34,8 @@ public class SimpliJobController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/simplijob/schedule/{id}")
+	/* A utility function to schedule the unscheduled or descheduled jobs*/
+	@RequestMapping("/simplijob/schedule/{id}") //id defines the job to be deschedule
 	public String scheduleSimpliJob(@PathVariable int id) throws SchedulerException
 	{
 		SimpliJob simpliJob=simpliJobRepository.findOne(id);

@@ -9,6 +9,8 @@ import org.eko.repository.SimpliJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+/* Class to initialize the Jobs */
 @Transactional
 @Service
 public class InitDbService {
@@ -16,6 +18,8 @@ public class InitDbService {
 	@Autowired
 	private SimpliJobRepository simpliJobRepository;
 	
+	
+	/*utility function to initialize the jobs after */
 	@PostConstruct
 	public void init()
 	{
