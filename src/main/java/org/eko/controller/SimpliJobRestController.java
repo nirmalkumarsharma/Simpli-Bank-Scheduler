@@ -118,7 +118,7 @@ public class SimpliJobRestController {
 		return simpliJobRepository.findByName(name);
 	}
 	
-	/* A utility function to all jobs through a valid JSON request */
+	/* A utility function to list all jobs through a valid JSON request */
 	@RequestMapping(value="/list" ,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<SimpliJob> getAllSimpliJobs()
 	{
